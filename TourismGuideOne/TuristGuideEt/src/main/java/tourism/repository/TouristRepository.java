@@ -1,6 +1,5 @@
 package tourism.repository;
 
-
 import org.springframework.stereotype.Repository;
 import tourism.model.TouristAttraction;
 
@@ -14,17 +13,33 @@ public class TouristRepository {
 
     public TouristRepository() {
 
+        populateAttractions();
     }
 
-    public void addAttraction(TouristAttraction attraction) {
-        attractions.add(attraction);
+    private void populateAttractions() { // DATABASE {Name, Description}
+
+        attractions.add(new TouristAttraction("Disney Land", "Amusement Park"));
+        attractions.add(new TouristAttraction("Watching movie", "Movie Theater"));
+        attractions.add(new TouristAttraction("Bowling", "Activity Center"));
+        attractions.add(new TouristAttraction("Esports", "Live competitive computer entertainment"));
     }
 
-    public List<TouristAttraction> getAttractions() {
-        return attractions;
+    // Vis alle attractions
+    public List<TouristAttraction> getAllAttractions() {
+
+        return new ArrayList<>(attractions);
     }
 
-    public void setAttractions(List<TouristAttraction> attractions) {
-        this.attractions = attractions;
+    // Hent attraction ud fra getName()
+    public TouristAttraction getAttractionByName(String name) {
+
+        for (TouristAttraction attraction : attractions) {
+
+            if (attraction.getName().equals(name)) {
+
+                return attraction;
+            }
+        }
+        return null;
     }
 }
